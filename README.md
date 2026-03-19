@@ -37,7 +37,7 @@
 
 ### Need help?
 - Telegram: [CMF Phone 2 Pro / Nothing Phone (3a) Lite | Global](https://t.me/CMFPhone2_Global)
-- Discussions: [Github Discussion](https://github.com/yadavnikhil03/CMF-Phone-2-Pro-Guide//discussions/new/choose)
+- Discussions: [Start a Discussion](https://github.com/yadavnikhil03/CMF-Phone-2-Pro-Guide/discussions/new/choose)
 
 ---
 

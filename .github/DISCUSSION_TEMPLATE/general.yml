@@ -1,0 +1,25 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        General discussion for CMF Phone 2 Pro guide users.
+
+        For troubleshooting, prefer the Q&A category so others can help faster.
+
+  - type: textarea
+    id: topic
+    attributes:
+      label: Discussion topic
+      description: Share your question, feedback, or update.
+      placeholder: I want to understand the safest order of flashing and rooting...
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Additional details (optional)
+      description: Add build number, current state, and context.
+      placeholder: Build, bootloader state, links, screenshots...
+    validations:
+      required: false

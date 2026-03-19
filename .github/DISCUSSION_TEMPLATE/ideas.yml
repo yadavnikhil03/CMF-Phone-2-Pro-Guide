@@ -1,0 +1,42 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Share your idea to improve this guide.
+
+        Useful ideas include clarity improvements, missing safety notes, and better navigation.
+
+  - type: input
+    id: title
+    attributes:
+      label: Idea Summary
+      placeholder: Add a dedicated section for relock checks
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Why is this needed?
+      description: Explain the problem this idea solves.
+      placeholder: New users are confused when...
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Describe your suggestion clearly.
+      placeholder: Add section X to page Y with steps...
+    validations:
+      required: true
+
+  - type: textarea
+    id: references
+    attributes:
+      label: Reference links (optional)
+      description: Share source posts, docs, or screenshots.
+      placeholder: https://...
+    validations:
+      required: false

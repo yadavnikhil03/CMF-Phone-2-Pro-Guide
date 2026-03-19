@@ -1,0 +1,56 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for opening a Q&A discussion.
+
+        Please include your current build number, bootloader/root state, and what guide step you followed.
+
+  - type: input
+    id: device
+    attributes:
+      label: Device
+      description: Confirm your device model.
+      placeholder: CMF Phone 2 Pro (Galaga)
+    validations:
+      required: true
+
+  - type: input
+    id: build
+    attributes:
+      label: Current Build Number
+      description: Found in Settings > About phone.
+      placeholder: Galaga_Bx.x-YYYYMMDD-HHMM
+    validations:
+      required: true
+
+  - type: dropdown
+    id: state
+    attributes:
+      label: Current Device State
+      options:
+        - Locked + Stock
+        - Unlocked + Stock
+        - Unlocked + Rooted (Magisk)
+        - Unlocked + Rooted (KSU/KSUN)
+        - Custom ROM
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Describe the issue clearly and include exact error text.
+      placeholder: Step X in guide Y failed with error ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: tried
+    attributes:
+      label: What have you already tried?
+      description: List troubleshooting attempts you already did.
+      placeholder: Reinstalled drivers, changed cable, retried fastboot...
+    validations:
+      required: false

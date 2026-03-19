@@ -1,0 +1,42 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Show your setup, successful workflow, or project based on this guide.
+
+        Keep it helpful for other CMF Phone 2 Pro users.
+
+  - type: input
+    id: setup
+    attributes:
+      label: Setup title
+      placeholder: Clean stock + Magisk + OTA workflow
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: What did you build or configure?
+      description: Share clear details and outcomes.
+      placeholder: I followed X and achieved Y...
+    validations:
+      required: true
+
+  - type: textarea
+    id: warnings
+    attributes:
+      label: Important warnings for others
+      description: Mention risks or gotchas users should know.
+      placeholder: Do not flash mismatched init_boot images...
+    validations:
+      required: false
+
+  - type: textarea
+    id: media
+    attributes:
+      label: Links/media (optional)
+      description: Add screenshots, logs, or relevant links.
+      placeholder: https://...
+    validations:
+      required: false
