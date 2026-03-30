@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMF Phone 2 Pro Web Guide</title>
+  <meta name="description" content="Guided step-by-step web navigator for CMF Phone 2 Pro modifications, rooting, OTA, and recovery workflows.">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CMF Phone 2 Pro Web Guide">
+  <meta property="og:description" content="Clear sequential paths for rooting, OTA, stock restore, and troubleshooting.">
+  <meta property="og:image" content="assets/og-preview.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="CMF Phone 2 Pro web guide preview card">
+  <meta property="og:image" content="assets/og-preview-mobile.svg">
+  <meta property="og:image:width" content="1080">
+  <meta property="og:image:height" content="1080">
+  <meta property="og:image:alt" content="CMF Phone 2 Pro web guide square mobile preview card">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="CMF Phone 2 Pro Web Guide">
+  <meta property="twitter:description" content="Pick your goal and follow a clean step-by-step path.">
+  <meta property="twitter:image" content="assets/og-preview.svg">
+  <meta property="twitter:image:alt" content="CMF Phone 2 Pro web guide preview">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="grain"></div>
+  <header class="topbar">
+    <div class="brand">
+      <span class="dot"></span>
+      <span>CMF WEB GUIDE</span>
+    </div>
+    <div class="topbar-actions">
+      <div class="lang-switch" id="langSwitch">
+        <button class="lang active" data-lang="en">EN</button>
+        <button class="lang" data-lang="hi">HI</button>
+      </div>
+      <button id="resetAll" class="ghost">Reset Progress</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="hero card">
+      <p class="eyebrow" id="eyebrowText">FOR NEW + ADVANCED USERS</p>
+      <h1 id="heroTitle">Pick your goal.<br>Follow a clean sequence.</h1>
+      <p class="sub" id="heroSub">This flow builder turns your guide into clear paths so users never get stuck wondering where to start.</p>
+      <div class="goal-grid" id="goalGrid">
+        <button class="goal active" data-goal="starter">I am new, start safe</button>
+        <button class="goal" data-goal="root">I want root access</button>
+        <button class="goal" data-goal="ota">I need OTA on rooted device</button>
+        <button class="goal" data-goal="stock">I want to return to stock</button>
+        <button class="goal" data-goal="repair">I am troubleshooting issues</button>
+      </div>
+    </section>
+
+    <section class="decision card">
+      <div class="decision-head">
+        <h2 id="decisionTitle">Smart Start</h2>
+        <span class="pill" id="decisionPill">Answer 3 quick questions</span>
+      </div>
+      <p id="decisionQuestion" class="decision-question"></p>
+      <div class="decision-actions">
+        <button id="decisionYes" class="goal">Yes</button>
+        <button id="decisionNo" class="goal">No</button>
+      </div>
+      <p id="decisionResult" class="decision-result"></p>
+      <button id="applyDecision" class="btn primary" hidden>Use this path</button>
+    </section>
+
+    <section class="route card">
+      <div class="route-head">
+        <h2 id="pathHeading">Recommended Path</h2>
+        <span id="progressStat" class="pill">0 / 0 complete</span>
+      </div>
+      <div id="stepList" class="step-list"></div>
+    </section>
+
+    <section class="panel card">
+      <h3 id="quickHeading">Quick Access</h3>
+      <div id="quickLinks" class="quick-links"></div>
+    </section>
+
+    <section class="viewer card">
+      <div class="viewer-head">
+        <h3 id="previewHeading">Guide Preview</h3>
+        <a id="openRaw" class="ghost linkish" href="wiki/landing.md" target="_blank" rel="noopener">Open full page</a>
+      </div>
+      <article id="markdownView" class="markdown-view">Select a step and click Preview to load guide content here.</article>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#080808"/>
+      <stop offset="100%" stop-color="#141414"/>
+    </linearGradient>
+    <pattern id="dotGrid" width="12" height="12" patternUnits="userSpaceOnUse">
+      <circle cx="1.2" cy="1.2" r="0.9" fill="#ffffff" fill-opacity="0.1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#dotGrid)"/>
+
+  <rect x="44" y="44" width="1112" height="542" rx="28" fill="none" stroke="#2a2a2a"/>
+  <rect x="74" y="74" width="1052" height="482" rx="22" fill="none" stroke="#222222"/>
+
+  <circle cx="1070" cy="116" r="84" fill="#ff5f1f" fill-opacity="0.2" stroke="#ff5f1f" stroke-opacity="0.7"/>
+  <circle cx="1070" cy="116" r="52" fill="none" stroke="#ff5f1f" stroke-opacity="0.85" stroke-width="3"/>
+
+  <g transform="translate(106,120)">
+    <circle cx="0" cy="0" r="9" fill="#ff5f1f"/>
+    <text x="24" y="8" fill="#f4f4f4" font-family="Space Grotesk, Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="4">CMF WEB GUIDE</text>
+  </g>
+
+  <text x="106" y="254" fill="#ffffff" font-family="Sora, Arial, sans-serif" font-size="72" font-weight="700">CMF PHONE 2 PRO</text>
+  <text x="106" y="328" fill="#ffffff" font-family="Sora, Arial, sans-serif" font-size="62" font-weight="700">WEB GUIDE</text>
+  <text x="106" y="384" fill="#bbbbbb" font-family="Space Grotesk, Arial, sans-serif" font-size="30" font-weight="500">Official-style onboarding experience</text>
+
+  <g transform="translate(106,444)">
+    <rect x="0" y="0" width="792" height="58" rx="14" fill="#101010" stroke="#ff5f1f"/>
+    <text x="24" y="37" fill="#ffb08d" font-family="Space Grotesk, Arial, sans-serif" font-size="27" font-weight="700">Clean, guided, and focused for CMF users</text>
+  </g>
+
+  <g transform="translate(940,250)">
+    <rect x="0" y="0" width="150" height="220" rx="16" fill="#0f0f0f" stroke="#2f2f2f"/>
+    <g fill="#f1f1f1" fill-opacity="0.55">
+      <circle cx="28" cy="32" r="5"/>
+      <circle cx="56" cy="32" r="5"/>
+      <circle cx="84" cy="32" r="5"/>
+      <circle cx="112" cy="32" r="5"/>
+      <circle cx="28" cy="60" r="5"/>
+      <circle cx="56" cy="60" r="5"/>
+      <circle cx="84" cy="60" r="5"/>
+      <circle cx="112" cy="60" r="5"/>
+      <circle cx="28" cy="88" r="5"/>
+      <circle cx="56" cy="88" r="5"/>
+      <circle cx="84" cy="88" r="5"/>
+      <circle cx="112" cy="88" r="5"/>
+      <circle cx="28" cy="116" r="5"/>
+      <circle cx="56" cy="116" r="5"/>
+      <circle cx="84" cy="116" r="5"/>
+      <circle cx="112" cy="116" r="5"/>
+      <circle cx="28" cy="144" r="5"/>
+      <circle cx="56" cy="144" r="5"/>
+      <circle cx="84" cy="144" r="5"/>
+      <circle cx="112" cy="144" r="5"/>
+      <circle cx="28" cy="172" r="5"/>
+      <circle cx="56" cy="172" r="5"/>
+      <circle cx="84" cy="172" r="5"/>
+      <circle cx="112" cy="172" r="5"/>
+    </g>
+    <rect x="18" y="190" width="114" height="12" rx="6" fill="#ff5f1f"/>
+  </g>
+</svg>
