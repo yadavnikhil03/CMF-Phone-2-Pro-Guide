@@ -24,7 +24,7 @@
   <meta property="twitter:image:alt" content="CMF Phone 2 Pro web guide preview">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -48,12 +48,26 @@
       <p class="eyebrow" id="eyebrowText">FOR NEW + ADVANCED USERS</p>
       <h1 id="heroTitle">Pick your goal.<br>Follow a clean sequence.</h1>
       <p class="sub" id="heroSub">This flow builder turns your guide into clear paths so users never get stuck wondering where to start.</p>
+      <div class="hero-strip">
+        <div class="hero-chip">
+          <span class="chip-label" id="totalGuidesLabel">Total Guides</span>
+          <strong id="totalGuidesStat">0</strong>
+        </div>
+        <div class="hero-chip">
+          <span class="chip-label" id="globalProgressLabel">Overall Progress</span>
+          <strong id="globalProgressStat">0%</strong>
+        </div>
+        <div class="hero-chip">
+          <span class="chip-label" id="activePathLabel">Active Path</span>
+          <strong id="activePathStat">Starter</strong>
+        </div>
+      </div>
       <div class="goal-grid" id="goalGrid">
-        <button class="goal active" data-goal="starter">I am new, start safe</button>
-        <button class="goal" data-goal="root">I want root access</button>
-        <button class="goal" data-goal="ota">I need OTA on rooted device</button>
-        <button class="goal" data-goal="stock">I want to return to stock</button>
-        <button class="goal" data-goal="repair">I am troubleshooting issues</button>
+        <button class="goal active" data-goal="starter">Safe Start</button>
+        <button class="goal" data-goal="root">Root Access</button>
+        <button class="goal" data-goal="ota">OTA Continuity</button>
+        <button class="goal" data-goal="stock">Back to Stock</button>
+        <button class="goal" data-goal="repair">Repair Flow</button>
       </div>
     </section>
 
@@ -64,8 +78,8 @@
       </div>
       <p id="decisionQuestion" class="decision-question"></p>
       <div class="decision-actions">
-        <button id="decisionYes" class="goal">Yes</button>
-        <button id="decisionNo" class="goal">No</button>
+        <button id="decisionYes" class="choice">Yes</button>
+        <button id="decisionNo" class="choice">No</button>
       </div>
       <p id="decisionResult" class="decision-result"></p>
       <button id="applyDecision" class="btn primary" hidden>Use this path</button>
@@ -75,6 +89,10 @@
       <div class="route-head">
         <h2 id="pathHeading">Recommended Path</h2>
         <span id="progressStat" class="pill">0 / 0 complete</span>
+      </div>
+      <div class="route-tools">
+        <input id="stepFilter" class="step-filter" type="search" placeholder="Search steps or file names">
+        <button id="toggleDoneOnly" class="ghost">Show done only: Off</button>
       </div>
       <div id="stepList" class="step-list"></div>
     </section>

@@ -43,12 +43,19 @@ const labels = {
     done: "Done",
     undo: "Undo",
     progress: "complete",
+    showDoneOnly: "Show done only",
+    on: "On",
+    off: "Off",
+    filterPlaceholder: "Search steps or file names",
+    totalGuidesLabel: "Total Guides",
+    globalProgressLabel: "Overall Progress",
+    activePathLabel: "Active Path",
     goals: {
-      starter: "I am new, start safe",
-      root: "I want root access",
-      ota: "I need OTA on rooted device",
-      stock: "I want to return to stock",
-      repair: "I am troubleshooting issues"
+      starter: "Safe Start",
+      root: "Root Access",
+      ota: "OTA Continuity",
+      stock: "Back to Stock",
+      repair: "Repair Flow"
     },
     decisionTitle: "Smart Start",
     decisionPill: "Answer quick questions",
@@ -80,12 +87,19 @@ const labels = {
     done: "Done",
     undo: "Undo",
     progress: "complete",
+    showDoneOnly: "Sirf done",
+    on: "On",
+    off: "Off",
+    filterPlaceholder: "Step ya file name search karo",
+    totalGuidesLabel: "Total Guides",
+    globalProgressLabel: "Overall Progress",
+    activePathLabel: "Active Path",
     goals: {
-      starter: "Main naya hoon, safe start",
-      root: "Mujhe root access chahiye",
-      ota: "Rooted device par OTA chahiye",
-      stock: "Mujhe stock par wapas jana hai",
-      repair: "Mujhe issues troubleshoot karne hain"
+      starter: "Safe Start",
+      root: "Root Access",
+      ota: "OTA Continuity",
+      stock: "Back to Stock",
+      repair: "Repair Flow"
     },
     decisionTitle: "Smart Start",
     decisionPill: "Quick questions ka answer do",
@@ -115,6 +129,14 @@ const progressStat = document.getElementById("progressStat");
 const markdownView = document.getElementById("markdownView");
 const openRaw = document.getElementById("openRaw");
 const resetAll = document.getElementById("resetAll");
+const stepFilter = document.getElementById("stepFilter");
+const toggleDoneOnly = document.getElementById("toggleDoneOnly");
+const totalGuidesLabel = document.getElementById("totalGuidesLabel");
+const globalProgressLabel = document.getElementById("globalProgressLabel");
+const activePathLabel = document.getElementById("activePathLabel");
+const totalGuidesStat = document.getElementById("totalGuidesStat");
+const globalProgressStat = document.getElementById("globalProgressStat");
+const activePathStat = document.getElementById("activePathStat");
 const goalButtons = [...document.querySelectorAll(".goal[data-goal]")];
 const langButtons = [...document.querySelectorAll(".lang[data-lang]")];
 const pathHeading = document.getElementById("pathHeading");
@@ -135,6 +157,9 @@ let activeGoal = "starter";
 let activeLang = localStorage.getItem("cmf-lang") || "en";
 let decisionNode = "q1";
 let decisionGoal = "";
+let doneOnly = false;
+let filterQuery = "";
+let focusedStepIndex = 0;
 
 function txt(path) {
   const parts = path.split(".");
@@ -147,6 +172,10 @@ function txt(path) {
 
 function titleFor(item) {
   return activeLang === "hi" ? item.titleHi : item.titleEn;
+}
+
+function routeLabel(goal) {
+  return txt(`goals.${goal}`) || goal;
 }
 
 function keyFor(goal) {
@@ -183,6 +212,11 @@ function renderStaticText() {
   decisionYes.textContent = txt("yes");
   decisionNo.textContent = txt("no");
   applyDecision.textContent = txt("usePath");
+  stepFilter.placeholder = txt("filterPlaceholder");
+  toggleDoneOnly.textContent = `${txt("showDoneOnly")}: ${doneOnly ? txt("on") : txt("off")}`;
+  totalGuidesLabel.textContent = txt("totalGuidesLabel");
+  globalProgressLabel.textContent = txt("globalProgressLabel");
+  activePathLabel.textContent = txt("activePathLabel");
   goalButtons.forEach((btn) => {
     const key = btn.dataset.goal;
     btn.textContent = txt(`goals.${key}`);
@@ -191,6 +225,16 @@ function renderStaticText() {
     markdownView.textContent = txt("previewPrompt");
   }
   langButtons.forEach((btn) => btn.classList.toggle("active", btn.dataset.lang === activeLang));
+  activePathStat.textContent = routeLabel(activeGoal);
+}
+
+function shouldRenderStep(item, id, progress) {
+  const doneMatch = !doneOnly || !!progress[id];
+  const q = filterQuery.trim().toLowerCase();
+  const title = titleFor(item).toLowerCase();
+  const file = item.file.toLowerCase();
+  const queryMatch = !q || title.includes(q) || file.includes(q);
+  return doneMatch && queryMatch;
 }
 
 function renderRoute() {
@@ -200,7 +244,7 @@ function renderRoute() {
 
   sequence.forEach((id, index) => {
     const item = guideMeta[id];
-    if (!item) {
+    if (!item || !shouldRenderStep(item, id, progress)) {
       return;
     }
 
@@ -227,8 +271,10 @@ function renderRoute() {
   });
 
   bindStepActions();
+  applyKeyboardFocus();
   renderQuickLinks();
   updateProgressStat();
+  updateGlobalStats();
 }
 
 function renderQuickLinks() {
@@ -245,6 +291,23 @@ function updateProgressStat() {
   const progress = readProgress(activeGoal);
   const completed = sequence.filter((id) => !!progress[id]).length;
   progressStat.textContent = `${completed} / ${sequence.length} ${txt("progress")}`;
+}
+
+function updateGlobalStats() {
+  const routeKeys = Object.keys(routes);
+  let total = 0;
+  let done = 0;
+  routeKeys.forEach((goal) => {
+    const sequence = routes[goal] || [];
+    const progress = readProgress(goal);
+    total += sequence.length;
+    done += sequence.filter((id) => !!progress[id]).length;
+  });
+
+  totalGuidesStat.textContent = String(Object.keys(guideMeta).length);
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  globalProgressStat.textContent = `${pct}%`;
+  activePathStat.textContent = routeLabel(activeGoal);
 }
 
 function isGoal(node) {
@@ -286,6 +349,25 @@ function resetDecision() {
   decisionNode = "q1";
   decisionGoal = "";
   renderDecision();
+}
+
+function focusRow(index) {
+  const rows = [...stepList.querySelectorAll(".step")];
+  if (!rows.length) {
+    focusedStepIndex = 0;
+    return;
+  }
+  focusedStepIndex = Math.max(0, Math.min(index, rows.length - 1));
+  rows.forEach((row, i) => row.classList.toggle("focused", i === focusedStepIndex));
+}
+
+function applyKeyboardFocus() {
+  const rows = [...stepList.querySelectorAll(".step")];
+  if (!rows.length) {
+    focusedStepIndex = 0;
+    return;
+  }
+  focusRow(focusedStepIndex);
 }
 
 async function loadMarkdown(path) {
@@ -362,8 +444,66 @@ applyDecision.addEventListener("click", () => {
 
 resetAll.addEventListener("click", () => {
   Object.keys(routes).forEach((goal) => localStorage.removeItem(keyFor(goal)));
+  doneOnly = false;
+  filterQuery = "";
+  stepFilter.value = "";
+  focusedStepIndex = 0;
+  renderStaticText();
   renderRoute();
   resetDecision();
+});
+
+stepFilter.addEventListener("input", () => {
+  filterQuery = stepFilter.value;
+  focusedStepIndex = 0;
+  renderRoute();
+});
+
+toggleDoneOnly.addEventListener("click", () => {
+  doneOnly = !doneOnly;
+  toggleDoneOnly.textContent = `${txt("showDoneOnly")}: ${doneOnly ? txt("on") : txt("off")}`;
+  focusedStepIndex = 0;
+  renderRoute();
+});
+
+window.addEventListener("keydown", (event) => {
+  if (event.key === "/" && document.activeElement !== stepFilter) {
+    event.preventDefault();
+    stepFilter.focus();
+    return;
+  }
+
+  if (document.activeElement === stepFilter) {
+    return;
+  }
+
+  const rows = [...stepList.querySelectorAll(".step")];
+  if (!rows.length) {
+    return;
+  }
+
+  if (event.key.toLowerCase() === "j") {
+    event.preventDefault();
+    focusRow(focusedStepIndex + 1);
+    return;
+  }
+
+  if (event.key.toLowerCase() === "k") {
+    event.preventDefault();
+    focusRow(focusedStepIndex - 1);
+    return;
+  }
+
+  if (event.key === "Enter") {
+    const row = rows[focusedStepIndex];
+    if (!row) {
+      return;
+    }
+    const previewBtn = row.querySelector("[data-preview]");
+    if (previewBtn) {
+      previewBtn.click();
+    }
+  }
 });
 
 renderStaticText();

@@ -23,10 +23,10 @@ body {
 }
 
 body {
-  font-family: "Space Grotesk", "Sora", sans-serif;
+  font-family: "Manrope", sans-serif;
   background:
-    radial-gradient(1200px 500px at 90% -10%, rgba(255, 95, 31, 0.18), transparent 60%),
-    radial-gradient(900px 500px at -10% 20%, rgba(255, 255, 255, 0.08), transparent 50%),
+    radial-gradient(1200px 500px at 90% -10%, rgba(255, 95, 31, 0.14), transparent 60%),
+    radial-gradient(900px 500px at -10% 20%, rgba(255, 255, 255, 0.06), transparent 50%),
     var(--bg);
   color: var(--text);
   padding: 24px;
@@ -85,8 +85,8 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: "Sora", sans-serif;
-  letter-spacing: 0.14em;
+  font-family: "Space Mono", monospace;
+  letter-spacing: 0.16em;
   font-size: 12px;
   font-weight: 700;
 }
@@ -108,7 +108,7 @@ body {
 }
 
 .card {
-  background: linear-gradient(170deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+  background: linear-gradient(170deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.015));
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 20px;
@@ -120,6 +120,33 @@ body {
   grid-column: 1 / -1;
   display: grid;
   gap: 14px;
+}
+
+.hero-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.hero-chip {
+  border: 1px solid var(--line);
+  background: rgba(10, 10, 10, 0.55);
+  border-radius: 14px;
+  padding: 10px 12px;
+  display: grid;
+  gap: 4px;
+}
+
+.chip-label {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-chip strong {
+  font-size: 21px;
+  font-family: "Sora", sans-serif;
 }
 
 .decision {
@@ -151,9 +178,10 @@ body {
 .eyebrow {
   margin: 0;
   color: var(--accent-soft);
-  letter-spacing: 0.18em;
-  font-size: 11px;
+  letter-spacing: 0.22em;
+  font-size: 10px;
   font-weight: 700;
+  font-family: "Space Mono", monospace;
 }
 
 h1,
@@ -164,9 +192,10 @@ p {
 }
 
 h1 {
-  font-family: "Sora", sans-serif;
+  font-family: "Manrope", sans-serif;
   line-height: 1.05;
   font-size: clamp(28px, 5vw, 56px);
+  font-weight: 800;
 }
 
 .sub {
@@ -184,14 +213,20 @@ h1 {
 .ghost,
 .btn {
   border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--surface);
+  border-radius: 14px;
+  background: #121212;
   color: var(--text);
   padding: 12px 14px;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 700;
   cursor: pointer;
   transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.goal {
+  text-align: left;
+  min-height: 50px;
 }
 
 .goal:hover,
@@ -202,8 +237,23 @@ h1 {
 }
 
 .goal.active {
-  background: linear-gradient(140deg, rgba(255, 95, 31, 0.25), rgba(255, 95, 31, 0.08));
+  background: linear-gradient(140deg, rgba(255, 95, 31, 0.26), rgba(255, 95, 31, 0.06));
   border-color: var(--accent);
+}
+
+.choice {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #121212;
+  color: var(--text);
+  padding: 12px 18px;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.choice:hover {
+  border-color: var(--accent-soft);
 }
 
 .route-head,
@@ -212,6 +262,28 @@ h1 {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 14px;
+}
+
+.route-tools {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.step-filter {
+  flex: 1;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #101010;
+  color: var(--text);
+  padding: 10px 12px;
+  font-family: inherit;
+  outline: none;
+}
+
+.step-filter:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(255, 95, 31, 0.2);
 }
 
 .pill {
@@ -234,7 +306,7 @@ h1 {
   align-items: center;
   border: 1px solid var(--line);
   background: var(--surface);
-  border-radius: 14px;
+  border-radius: 12px;
   padding: 10px;
   animation: riseIn 0.35s ease both;
   animation-delay: var(--d, 0ms);
@@ -243,6 +315,11 @@ h1 {
 .step.done {
   border-color: rgba(87, 209, 141, 0.4);
   background: linear-gradient(160deg, rgba(87, 209, 141, 0.16), rgba(87, 209, 141, 0.04));
+}
+
+.step.focused {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(255, 95, 31, 0.2);
 }
 
 .step-index {
@@ -263,7 +340,7 @@ h1 {
 }
 
 .step-title {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .step-file {
@@ -302,10 +379,11 @@ h1 {
   text-decoration: none;
   color: var(--text);
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 10px;
   padding: 10px;
-  background: var(--surface);
+  background: #121212;
   font-size: 13px;
+  font-weight: 600;
 }
 
 .quick-link:hover {
@@ -331,7 +409,8 @@ h1 {
 .markdown-view h1,
 .markdown-view h2,
 .markdown-view h3 {
-  font-family: "Sora", sans-serif;
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
   margin-top: 1.3em;
   margin-bottom: 0.4em;
 }
@@ -377,6 +456,10 @@ h1 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .hero-strip {
+    grid-template-columns: 1fr;
+  }
+
   .step {
     grid-template-columns: auto 1fr;
   }
@@ -386,6 +469,10 @@ h1 {
   }
 
   .decision-actions {
+    flex-direction: column;
+  }
+
+  .route-tools {
     flex-direction: column;
   }
 }
